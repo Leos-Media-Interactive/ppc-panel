@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.cmp-canvas{
+    display: none;
+    pointer-events: none;
+    &.active-canvas{
+        display: unset;
+    }
+}
+.btn-active{
+    span{
+        color: #fff!important;
+    }
+}
+.loader-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #ededed;
+    opacity: 0;
+    pointer-events: none;
+    &.loading{
+        opacity: 1;
+        pointer-events: all;
+        z-index: 9999;
+    }
+}
+
+.loader {
+    max-width: 15rem;
+    width: 100%;
+    height: auto;
+    stroke-linecap: round;
+}
+
+circle {
+    fill: none;
+    stroke-width: 3.5;
+    animation-name: preloader;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    transform-origin: 170px 170px;
+    will-change: transform;
+
+    &:nth-of-type(1) {
+        stroke-dasharray: 550px;
+    }
+
+    &:nth-of-type(2) {
+        stroke-dasharray: 500px;
+    }
+
+    &:nth-of-type(3) {
+        stroke-dasharray: 450px;
+    }
+
+    &:nth-of-type(4) {
+        stroke-dasharray: 300px;
+    }
+
+    @for $i from 1 through 4 {
+        &:nth-of-type(#{$i}) {
+            animation-delay: -#{$i * 0.15}s;
+        }
+    }
+}
+
+@keyframes preloader {
+    50% {
+        transform: rotate(360deg);
+    }
+}
