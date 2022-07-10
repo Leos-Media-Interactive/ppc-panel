@@ -208,6 +208,15 @@ class GoogleAdsApi extends Controller
     }
 
     public function CALL_METRICS_CALL_DETAILS_REPORT($adwords_id, $range){
+
+
+        if(!$adwords_id){
+            return [
+                'status' => 'NO_ADWORDS_ID',
+                'response' => []
+            ];
+        }
+
         $client = $this->createAdsClient()->getGoogleAdsServiceClient();
 
 
@@ -238,7 +247,7 @@ class GoogleAdsApi extends Controller
             $callView = $googleAdsRow->getCallView();
             $adGroup = $googleAdsRow->getAdGroup();
 
-            $data['response'] = [
+            $data['response'][] = [
                 'campaign' => [
                     'id' => $campaign->getId(),
                     'name' => $campaign->getName()
@@ -247,7 +256,7 @@ class GoogleAdsApi extends Controller
                     'id' => $adGroup->getId(),
                     'name' => $adGroup->getName()
                 ],
-                'calls' => [
+                'call_entry' => [
                     'call_duration_seconds' => $callView->getCallDurationSeconds(),
                     'caller_country_code' => $callView->getCallerCountryCode(),
                     'call_status' => $callStatus[GoogleVoiceCallStatus::name($callView->getCallStatus())],

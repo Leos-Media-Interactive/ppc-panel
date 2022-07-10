@@ -9,7 +9,7 @@ class AdsData extends Controller
 {
 
 
-    public function account($range = 'TODAY')
+    public function account(Request $request, $range = 'TODAY')
     {
 
         $userAdwordsId = auth()->user()->adwords_id;
@@ -65,13 +65,15 @@ class AdsData extends Controller
         $ads = new GoogleAdsApi();
         $data = $ads->CALL_METRICS_CALL_DETAILS_REPORT($userAdwordsId, $range);
 
+        //dd($data);
+
         if ($data['status'] === 'has_errors') {
             return view('errors', [
                 'errors' => $data['errors'],
             ]);
         } else {
             return view('adsdata.calls', [
-                'account_performance' => $data['response'],
+                'calls' => $data['response'],
                 'selected_range' => $range
             ]);
         }

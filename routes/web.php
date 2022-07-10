@@ -35,12 +35,14 @@ Route::middleware([
     Route::get('/clients-edit/{id}', [Page::class, 'clientsEdit'])->name('page.clients.edit');
     Route::post('/clients-update', [Page::class, 'clientsUpdate'])->name('page.clients.update');
     Route::get('/reset-password', [Page::class, 'resetPassword'])->name('page.reset.psw');
-
     Route::get('/stats/account/{range?}/{client?}', [AdsData::class, 'account'])->name('stats.account');
     Route::get('/stats/keywords/{range?}/{client?}', [AdsData::class, 'keywords'])->name('stats.keywords');
     Route::get('/stats/calls/{range?}/{client?}', [AdsData::class, 'calls'])->name('stats.calls');
-
     Route::get('/reset/{user}', [Page::class, 'resetPassword'])->name('password.reset');
+
+    Route::get('/load-client-id/{id}', [Page::class, 'loadClientId'])->name('load-id');
+
+
 
 
 });

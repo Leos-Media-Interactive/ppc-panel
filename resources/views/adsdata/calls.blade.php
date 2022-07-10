@@ -27,12 +27,12 @@
                         <tbody>
                         @foreach($calls as $_call)
                             <tr class="text-center">
-                                <td>{{ $_call['calls']['start_call_date_time'] }}</td>
-                                <td>{{ $_call['campaign']['name'] }}</td>
-                                <td class="flex justify-center">{{ svg($_call['calls']['type'], 'w-6 h-6') }}</td>
-                                <td>{!! $_call['calls']['call_status'] !!}</td>
-                                <td>{{ $_call['calls']['call_duration_seconds'] }}</td>
-                                <td>{{ $_call['calls']['caller_country_code'] }}</td>
+                                <td>{{ $_call['call_entry']['start_call_date_time'] }}</td>
+                                <td>{{ $_call['ad_group']['name'] }}</td>
+                                <td class="flex justify-center">{{ svg($_call['call_entry']['type'], 'w-6 h-6') }}</td>
+                                <td>{!! $_call['call_entry']['call_status'] !!}</td>
+                                <td>{{ $_call['call_entry']['call_duration_seconds'] }}</td>
+                                <td>{{ $_call['call_entry']['caller_country_code'] }}</td>
                             </tr>
                         @endforeach
 

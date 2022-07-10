@@ -50,6 +50,9 @@
                             </tr>
                             </thead>
                             <tbody>
+                            <p>
+                                ID: {{ session('client_id') }}
+                            </p>
                             @foreach($clients as $client)
                                 <tr class="border-b border-opacity-20 border-gray-300 bg-gray-50">
 
@@ -79,6 +82,10 @@
 
                                         <a href="{{ route('password.reset', $client->id) }}" title="איפוס סיסמא">
                                             <x-fontisto-random class="w-5 mr-1"/>
+                                        </a>
+
+                                        <a href="{{ route('load-id', $client->id) }}">
+                                            <x-akar-statistic-up class="w-5 mr-1"/>
                                         </a>
                                     </td>
                                 </tr>

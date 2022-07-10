@@ -19,6 +19,7 @@ class Page extends Controller
 
     public function clients(){
 
+
         if(auth()->user()->role !== 'super_admin' && auth()->user()->role !== 'manager'){
             return redirect('/');
         }
@@ -118,6 +119,21 @@ class Page extends Controller
         }else{
             return redirect()->route('page.clients')->with('message', 'אין לך הרשאות לביצוע פעולה');
         }
+
+    }
+
+    public function loadClientId($id){
+
+        if(auth()->user()->role !== 'super_admin' && auth()->user()->role !== 'manager'){
+            return redirect('/');
+        }
+
+        if($id){
+            session(['client_id' => $id]);
+        }
+
+        return redirect()->route('page.clients');
+
 
     }
 }

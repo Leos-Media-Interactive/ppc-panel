@@ -8,6 +8,7 @@
         "php": "^8.0.2",
         "andreiio/blade-remix-icon": "^1.1",
         "blade-ui-kit/blade-icons": "^1.3",
+        "codeat3/blade-akar-icons": "^1.17",
         "codeat3/blade-ant-design-icons": "^1.3",
         "codeat3/blade-emblemicons": "^1.2",
         "codeat3/blade-fontisto-icons": "^1.2",
