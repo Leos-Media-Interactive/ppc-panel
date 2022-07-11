@@ -13,15 +13,13 @@ class AdsData extends Controller
     {
 
         $userAdwordsId = auth()->user()->adwords_id;
+
         if(auth()->user()->role === 'super_admin' || auth()->user()->role === 'manager'){
-            return view('adsdata.account', [
-                'account_performance' => [
-                    'ad_rows' => []
-                ],
-                'selected_range' => $range,
-                'user_role' => 'manager'
-            ]);
+            if(session()->has('client_adwords_id')){
+                $userAdwordsId = session('client_adwords_id');
+            }
         }
+
         $ads = new GoogleAdsApi();
         $data = $ads->ACCOUNT_PERFORMANCE_REPORT($userAdwordsId, $range);
 
@@ -43,6 +41,13 @@ class AdsData extends Controller
 
         $userAdwordsId = auth()->user()->adwords_id;
         $ads = new GoogleAdsApi();
+
+        if(auth()->user()->role === 'super_admin' || auth()->user()->role === 'manager'){
+            if(session()->has('client_adwords_id')){
+                $userAdwordsId = session('client_adwords_id');
+            }
+        }
+
         $data = $ads->KEYWORDS_PERFORMANCE_REPORT($userAdwordsId, $range);
 
         if ($data['status'] === 'has_errors') {
@@ -62,10 +67,16 @@ class AdsData extends Controller
     {
 
         $userAdwordsId = auth()->user()->adwords_id;
+
+        if(auth()->user()->role === 'super_admin' || auth()->user()->role === 'manager'){
+            if(session()->has('client_adwords_id')){
+                $userAdwordsId = session('client_adwords_id');
+            }
+        }
+
         $ads = new GoogleAdsApi();
         $data = $ads->CALL_METRICS_CALL_DETAILS_REPORT($userAdwordsId, $range);
 
-        //dd($data);
 
         if ($data['status'] === 'has_errors') {
             return view('errors', [

@@ -26,9 +26,11 @@ class Page extends Controller
 
 
         $clients = User::where('role', 'client')->get();
+        $sessionId = session('client_id');
 
         return view('clients', [
-            'clients' => $clients
+            'clients' => $clients,
+            'session_id' => $sessionId
         ]);
     }
 
@@ -129,7 +131,11 @@ class Page extends Controller
         }
 
         if($id){
-            session(['client_id' => $id]);
+            $client = User::where('id', $id)->first();
+            session(['client_id' => $client->id]);
+            session(['client_name' => $client->name]);
+            session(['client_adwords_id' => $client->adwords_id]);
+
         }
 
         return redirect()->route('page.clients');

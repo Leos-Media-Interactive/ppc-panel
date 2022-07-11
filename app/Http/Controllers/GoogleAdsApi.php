@@ -111,6 +111,7 @@ class GoogleAdsApi extends Controller
 
         $q = $this->buildQuery('ACCOUNT_PERFORMANCE_REPORT', 'campaign', $range);
 
+
         $response = $this->tryQuery($client, $adwords_id, $q);
 
 
@@ -170,6 +171,7 @@ class GoogleAdsApi extends Controller
 
         $q = $this->buildQuery('KEYWORDS_PERFORMANCE_REPORT', 'ad_group', $range);
 
+
         $response = $client->search($adwords_id, $q, ['pageSize' => 1000]);
         $data = [
             'status' => 'success',
@@ -227,6 +229,8 @@ class GoogleAdsApi extends Controller
 
 
         $q = $this->buildQuery('CALL_METRICS_CALL_DETAILS_REPORT', 'call_view', $range);
+
+
 
         $response = $client->search($adwords_id, $q, ['pageSize' => 1000]);
         $data = [
