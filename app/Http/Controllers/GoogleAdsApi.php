@@ -7,6 +7,7 @@ use Google\Ads\GoogleAds\Lib\V11\GoogleAdsClient;
 use Google\Ads\GoogleAds\Lib\V11\GoogleAdsClientBuilder;
 use Google\Ads\GoogleAds\Util\FieldMasks;
 use Google\Ads\GoogleAds\Util\V11\ResourceNames;
+use Google\Ads\GoogleAds\V11\Enums\AdGroupStatusEnum\AdGroupStatus;
 use Google\Ads\GoogleAds\V11\Enums\CallTypeEnum\CallType;
 use Google\Ads\GoogleAds\V11\Enums\CampaignStatusEnum\CampaignStatus;
 use Google\Ads\GoogleAds\V11\Enums\GoogleVoiceCallStatusEnum\GoogleVoiceCallStatus;
@@ -26,7 +27,7 @@ class GoogleAdsApi extends Controller
 
     private static array $_REPORT_TYPE = [
         'ACCOUNT_PERFORMANCE_REPORT' => ['campaign.id', 'campaign.name', 'customer.descriptive_name', 'metrics.impressions', 'metrics.clicks', 'metrics.ctr', 'metrics.average_cpc', 'metrics.conversions', 'metrics.conversions_from_interactions_rate', 'metrics.cost_per_conversion', 'metrics.cost_micros', 'customer.currency_code', 'metrics.conversions_value', 'segments.device'],
-        'KEYWORDS_PERFORMANCE_REPORT' => ['campaign.id', 'campaign.name', 'ad_group.id', 'ad_group.name', 'metrics.impressions', 'metrics.clicks', 'metrics.ctr', 'metrics.average_cpc', 'metrics.conversions', 'metrics.conversions_from_interactions_rate', 'metrics.cost_per_conversion', 'metrics.cost_micros', 'metrics.conversions_value'],
+        'KEYWORDS_PERFORMANCE_REPORT' => ['campaign.id', 'campaign.name', 'ad_group.id', 'ad_group.name', 'ad_group.status',  'metrics.impressions', 'metrics.clicks', 'metrics.ctr', 'metrics.average_cpc', 'metrics.conversions', 'metrics.conversions_from_interactions_rate', 'metrics.cost_per_conversion', 'metrics.cost_micros', 'metrics.conversions_value'],
         'CALL_METRICS_CALL_DETAILS_REPORT' => ['campaign.id', 'campaign.name', 'ad_group.id', 'ad_group.name', 'customer.currency_code', 'call_view.call_duration_seconds', 'call_view.caller_country_code', 'call_view.call_status', 'call_view.call_tracking_display_location', 'call_view.type', 'campaign.name', 'call_view.start_call_date_time'],
     ];
 
@@ -178,6 +179,10 @@ class GoogleAdsApi extends Controller
         foreach ($response->iterateAllElements() as $googleAdsRow) {
 
             $metrics = $googleAdsRow->getMetrics();
+            $adGroup = $googleAdsRow->getAdGroup();
+            $adGroupStatus = AdGroupStatus::name($adGroup->getStatus());
+
+            if(auth()->user()->role === 'client' && $adGroupStatus === 'PAUSED') continue;
 
             $data['response']['ad_rows'][] = [
                 'campaign' => [
@@ -185,8 +190,9 @@ class GoogleAdsApi extends Controller
                     'name' => $googleAdsRow->getCampaign()->getName()
                 ],
                 'ad_group' => [
-                    'id' => $googleAdsRow->getAdGroup()->getId(),
-                    'name' => $googleAdsRow->getAdGroup()->getName()
+                    'id' => $adGroup->getId(),
+                    'name' => $adGroup->getName(),
+                    'status' => $adGroupStatus,
                 ],
                 'metrics' => [
                     'impressions' => $metrics->getImpressions(),

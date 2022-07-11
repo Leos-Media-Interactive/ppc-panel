@@ -144,8 +144,10 @@
                     @foreach($account_performance['ad_rows'] as $_row)
                         <button id="cmp-nav-{{ $_row['ad_group']['id'] }}"
                                 data-id="{{ $_row['ad_group']['id'] }}"
-                                class="cmp-nav btn btn-outline btn-info border-b @if ($loop->first) btn-active @endif">
-                            <span class="text-right text-black block w-max">{{ $_row['ad_group']['name'] }}</span>
+                                class="cmp-nav btn btn-outline btn-info border-b @if ($loop->first) btn-active @endif ">
+                            <span class="text-right text-black block w-max">
+                                {{ $_row['ad_group']['name'] }}
+                            </span>
                         </button>
                     @endforeach
                 </div>
