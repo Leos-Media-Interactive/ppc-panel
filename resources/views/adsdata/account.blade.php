@@ -22,13 +22,13 @@
                             <div class="card-body" style="direction: ltr">
                                 <div class="stats shadow text-right">
                                     <div class="stat flex flex-col justify-between">
-                                        <div class="stat-title">קליקים</div>
+                                        <div class="stat-title font-bold">קליקים</div>
                                         <div class="stat-value">{{ $_c['metrics']['clicks']  }}</div>
                                     </div>
 
                                     <div class="stat flex">
                                         <div class="grow flex flex-col justify-between">
-                                            <div class="stat-title ">שעיור קליקים</div>
+                                            <div class="stat-title font-bold">שעיור קליקים</div>
                                             <div class="stat-value">{{ round($_c['metrics']['ctr'] * 100, 1)  }}%</div>
                                         </div>
                                         <div class="">
@@ -41,13 +41,13 @@
                                     </div>
 
                                     <div class="stat flex flex-col justify-between">
-                                        <div class="stat-title"> המרות</div>
+                                        <div class="stat-title font-bold"> המרות</div>
                                         <div class="stat-value">{{ round($_c['metrics']['conversions']) }}</div>
                                     </div>
 
                                     <div class="stat flex">
                                         <div class="grow flex flex-col justify-between">
-                                            <div class="stat-title ">שעיור המרות</div>
+                                            <div class="stat-title font-bold">שעיור המרות</div>
                                             <div
                                                 class="stat-value">{{ round($_c['metrics']['conversions_from_interactions_rate'] * 100, 1)  }}
                                                 %
@@ -76,7 +76,7 @@
                                             </svg>
                                         </div>
                                         <div>
-                                            <div class="stat-title">מחיר מממוצע לקליק</div>
+                                            <div class="stat-title font-bold">מחיר מממוצע לקליק</div>
                                             <div
                                                 class="stat-value">{{ round(($_c['metrics']['average_cpc'] / 1000000), 2) }}</div>
                                         </div>
@@ -91,7 +91,7 @@
                                             </svg>
                                         </div>
                                         <div>
-                                            <div class="stat-title">מחיר ממוצע להמרה</div>
+                                            <div class="stat-title font-bold">מחיר ממוצע להמרה</div>
                                             <div
                                                 class="stat-value">{{ round(($_c['metrics']['cost_per_conversion'] / 1000000), 2) }}</div>
                                         </div>
@@ -104,7 +104,7 @@
 
                                         </div>
                                         <div>
-                                            <div class="stat-title">הכנסה</div>
+                                            <div class="stat-title font-bold">הכנסה</div>
                                             <div class="stat-value">{{ $_c['metrics']['conversions_value'] }}</div>
                                         </div>
                                     </div>
@@ -114,7 +114,7 @@
                                             <x-ri-money-dollar-circle-fill class="inline-block w-8 h-8"/>
                                         </div>
                                         <div>
-                                            <div class="stat-title">מחיר כולל</div>
+                                            <div class="stat-title font-bold">מחיר כולל</div>
                                             <div
                                                 class="stat-value">{{ round(($_c['metrics']['cost_micros'] / 1000000), 2) }}</div>
                                         </div>
@@ -124,7 +124,7 @@
                                             <x-antdesign-eye-o class="inline-block w-8 h-8"/>
                                         </div>
                                         <div>
-                                            <div class="stat-title">חשיפות</div>
+                                            <div class="stat-title font-bold">חשיפות</div>
                                             <div class="stat-value">{{ $_c['metrics']['impressions'] }}</div>
                                         </div>
                                     </div>
@@ -154,7 +154,7 @@
                         @foreach($account_performance['ad_rows'] as $_row)
                             <button id="cmp-nav-{{ $_row['campaign']['id'] }}"
                                     data-id="{{ $_row['campaign']['id'] }}"
-                                    class="cmp-nav btn btn-outline btn-info border-b flex justify-between @if ($loop->first) btn-active @endif">
+                                    class="{{ $_row['el-class'] }} cmp-nav btn btn-outline btn-info border-b flex justify-between @if ($loop->first) btn-active @endif">
                                 <span class="text-right text-black block w-max">{{ $_row['campaign']['name'] }}</span>
                                 {{ svg($_row['device'], 'w-4 w-4') }}
                             </button>

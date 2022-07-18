@@ -87,6 +87,16 @@
                                         <a href="{{ route('load-id', $client->id) }}">
                                             <x-akar-statistic-up class="w-5 mr-1"/>
                                         </a>
+
+                                        <script type="text/javascript">
+                                            function confirm_alert(node) {
+                                                return confirm("למחוק לקוח ?");
+                                            }
+                                        </script>
+                                        <a href="{{ route('page.clients.delete', ['id' => $client->id]) }}" onclick="return confirm_alert(this);">
+                                            <x-antdesign-close-square class="w-5 mr-1" />
+                                        </a>
+
                                     </td>
                                 </tr>
                             @endforeach

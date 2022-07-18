@@ -139,8 +139,10 @@ class GoogleAdsApi extends Controller
             $segment = $googleAdsRow->getSegments();
             $device = new \Google\Ads\GoogleAds\V11\Enums\DeviceEnum\Device();
 
+            if($device->name($segment->getDevice()) !== 'DESKTOP') continue;
 
             $data['response']['ad_rows'][] = [
+                'el-class' => $device->name($segment->getDevice()),
                 'device' => $device_icon[$device->name($segment->getDevice())],
                 'campaign' => [
                     'id' => $googleAdsRow->getCampaign()->getId(),

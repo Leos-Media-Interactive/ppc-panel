@@ -77,12 +77,26 @@ class Page extends Controller
 
     public function clientsEdit($id): View{
 
+
+
         $user = User::where('id', $id)->first();
 
 
         return view('clients-edit', [
             'user' => $user
         ]);
+
+    }
+
+    public function clientsDelete($id){
+
+        if(auth()->user()->role !== 'super_admin' && auth()->user()->role !== 'manager'){
+            return redirect('/');
+        }
+
+        User::where('id', $id)->delete();
+
+        return redirect()->route('page.clients')->with('message', 'לקוח נמחק בהצלחה');
 
     }
 

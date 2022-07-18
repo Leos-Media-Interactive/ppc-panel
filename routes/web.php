@@ -33,6 +33,7 @@ Route::middleware([
     Route::get('/clients-add', [Page::class, 'clientsAdd'])->name('page.clients.add');
     Route::post('/clients-add', [Page::class, 'clientsStore'])->name('page.clients.store');
     Route::get('/clients-edit/{id}', [Page::class, 'clientsEdit'])->name('page.clients.edit');
+    Route::get('/clients-delete/{id}', [Page::class, 'clientsDelete'])->name('page.clients.delete');
     Route::post('/clients-update', [Page::class, 'clientsUpdate'])->name('page.clients.update');
     Route::get('/reset-password', [Page::class, 'resetPassword'])->name('page.reset.psw');
     Route::get('/stats/account/{range?}/{client?}', [AdsData::class, 'account'])->name('stats.account');
@@ -42,7 +43,9 @@ Route::middleware([
 
     Route::get('/load-client-id/{id}', [Page::class, 'loadClientId'])->name('load-id');
 
+});
 
 
-
+Route::get('/panel', function (){
+    return redirect('stats.account');
 });
