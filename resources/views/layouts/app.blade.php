@@ -28,10 +28,11 @@
 <div class="min-h-screen bg-gray-100">
     @livewire('navigation-menu')
     <div class="w-full">
-        <div class="flex flex-row py-4 w-full">
-            <aside class="w-60" aria-label="Sidebar">
+        <div class="flex md:flex-row flex-col py-4 w-full">
+            <aside class="lg:w-60 md:w-60 w-full" aria-label="Sidebar">
                 <div class="overflow-y-auto py-4 px-3 bg-gray-50 rounded dark:bg-gray-800">
                     <ul class="space-y-2">
+                        @if(0)
                         <li>
                             <a href="{{ route('dashboard') }}"
                                class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
@@ -44,6 +45,7 @@
                                 <span class="mr-3">מסך ראשי</span>
                             </a>
                         </li>
+                        @endif
                         <li>
                             <button type="button"
                                     class="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"

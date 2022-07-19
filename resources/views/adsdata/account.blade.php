@@ -5,8 +5,8 @@
         </h2>
     </x-slot>
 
-    <div class="mx-auto sm:px-6 lg:px-8 flex">
-        <div class="bg-white w-4/5 grow shadow-xl mx-2 sm:rounded-lg">
+    <div class="mx-auto sm:px-6 lg:px-8 flex md:flex-row flex-col-reverse">
+        <div class="bg-white md:w-4/5 w-full grow shadow-xl mx-2 sm:rounded-lg">
             <div class="container p-2 mx-auto sm:p-4 text-gray-800 relative">
 
                 @if(!empty($account_performance))
@@ -20,7 +20,7 @@
                             </div>
 
                             <div class="card-body" style="direction: ltr">
-                                <div class="stats shadow text-right">
+                                <div class="stats shadow text-right flex md:flex-row flex-col">
                                     <div class="stat flex flex-col justify-between">
                                         <div class="stat-title font-bold">קליקים</div>
                                         <div class="stat-value">{{ $_c['metrics']['clicks']  }}</div>
@@ -28,7 +28,7 @@
 
                                     <div class="stat flex">
                                         <div class="grow flex flex-col justify-between">
-                                            <div class="stat-title font-bold">שעיור קליקים</div>
+                                            <div class="stat-title font-bold">שיעור קליקים</div>
                                             <div class="stat-value">{{ round($_c['metrics']['ctr'] * 100, 1)  }}%</div>
                                         </div>
                                         <div class="">
@@ -47,7 +47,7 @@
 
                                     <div class="stat flex">
                                         <div class="grow flex flex-col justify-between">
-                                            <div class="stat-title font-bold">שעיור המרות</div>
+                                            <div class="stat-title font-bold">שיעור המרות</div>
                                             <div
                                                 class="stat-value">{{ round($_c['metrics']['conversions_from_interactions_rate'] * 100, 1)  }}
                                                 %
@@ -65,9 +65,9 @@
 
                                 <div class="divider"></div>
 
-                                <div class="stats shadow">
+                                <div class="stats shadow flex md:flex-row flex-col">
 
-                                    <div class="stat text-right flex justify-between">
+                                    <div class="stat text-right flex justify-between ">
                                         <div class="stat-figure text-secondary">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                  class="inline-block w-8 h-8 stroke-current">
@@ -144,7 +144,7 @@
 
             </div>
         </div>
-        <div class="bg-white w-80  shadow-xl mx-2 sm:rounded-lg">
+        <div class="bg-white md:w-80  w-full shadow-xl mx-2 sm:rounded-lg">
             <div class="container p-2 mx-auto sm:p-4 text-gray-800">
                 <x-jet-range-controller content="{{ route('stats.account') }}" range="{{ $selected_range }}" />
                 <h3 class="text-center mb-2">קמפיינים</h3>

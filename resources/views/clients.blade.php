@@ -38,6 +38,9 @@
                                     <p class="text-center">E-mail</p>
                                 </th>
                                 <th class="p-3">
+                                    <p class="text-center">Role</p>
+                                </th>
+                                <th class="p-3">
                                     <p class="text-center">כניסה אחרונה</p>
                                 </th>
                                 <th class="p-3">
@@ -54,7 +57,7 @@
                                 ID: {{ session('client_id') }}
                             </p>
                             @foreach($clients as $client)
-                                <tr class="border-b border-opacity-20 border-gray-300 bg-gray-50">
+                                <tr class="border-b border-opacity-20 border-gray-300  {{ $client->role === 'manager' ? 'bg-indigo-300' : 'bg-gray-50' }}">
 
                                     <td class="p-3">
                                         <p>{{ $client->id }}</p>
@@ -68,6 +71,9 @@
                                     </td>
                                     <td class="p-3">
                                         <p class="text-center">{{ $client->email }}</p>
+                                    </td>
+                                    <td class="p-3">
+                                        <p class="text-center">{{ $client->role }}</p>
                                     </td>
                                     <td class="p-3">
                                         <p></p>

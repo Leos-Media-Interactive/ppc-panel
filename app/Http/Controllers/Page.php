@@ -25,7 +25,7 @@ class Page extends Controller
         }
 
 
-        $clients = User::where('role', 'client')->get();
+        $clients = User::all();
         $sessionId = session('client_id');
 
         return view('clients', [
