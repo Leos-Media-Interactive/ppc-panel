@@ -7,7 +7,7 @@
 
     <div class="mx-auto sm:px-6 lg:px-8 flex">
         <div class="bg-white w-full grow shadow-xl mx-2 sm:rounded-lg">
-            <div class="container p-2 mx-auto sm:p-4 text-gray-800 relative">
+            <div class="container p-2 mx-auto sm:p-4 text-gray-800 relative overflow-x-auto">
 
                 <x-jet-range-controller content="{{ route('stats.calls') }}" range="{{ $selected_range }}" />
 

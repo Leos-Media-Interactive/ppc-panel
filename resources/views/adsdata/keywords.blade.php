@@ -5,8 +5,8 @@
         </h2>
     </x-slot>
 
-    <div class="mx-auto sm:px-6 lg:px-8 flex">
-        <div class="bg-white w-4/5 grow shadow-xl mx-2 sm:rounded-lg">
+    <div class="mx-auto sm:px-6 lg:px-8 flex flex md:flex-row flex-col-reverse">
+        <div class="bg-white md:w-4/5 w-full grow shadow-xl mx-2 sm:rounded-lg">
             <div class="container p-2 mx-auto sm:p-4 text-gray-800 relative">
 
                 @foreach($account_performance['ad_rows'] as $_c)
@@ -19,7 +19,7 @@
                         </div>
 
                         <div class="card-body" style="direction: ltr">
-                            <div class="stats shadow text-right">
+                            <div class="stats shadow text-right flex md:flex-row flex-col">
                                 <div class="stat flex flex-col justify-between">
                                     <div class="stat-title">קליקים</div>
                                     <div class="stat-value">{{ $_c['metrics']['clicks']  }}</div>
@@ -64,7 +64,7 @@
 
                             <div class="divider"></div>
 
-                            <div class="stats shadow">
+                            <div class="stats shadow flex md:flex-row flex-col">
 
                                 <div class="stat text-right flex justify-between">
                                     <div class="stat-figure text-secondary">
@@ -135,7 +135,7 @@
 
             </div>
         </div>
-        <div class="bg-white w-80  shadow-xl mx-2 sm:rounded-lg">
+        <div class="bg-white md:w-80  w-full shadow-xl mx-2 sm:rounded-lg">
             <div class="container p-2 mx-auto sm:p-4 text-gray-800">
                 <x-jet-range-controller content="{{ route('stats.keywords') }}" range="{{ $selected_range }}" />
                 <h3 class="text-center mb-2">מילות מפתח</h3>
