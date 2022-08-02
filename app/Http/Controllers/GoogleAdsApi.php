@@ -188,6 +188,9 @@ class GoogleAdsApi extends Controller
         foreach ($response->iterateAllElements() as $googleAdsRow) {
 
             $metrics = $googleAdsRow->getMetrics();
+
+            if(!$metrics->getImpressions() > 0) continue;
+
             $adGroup = $googleAdsRow->getAdGroup();
             $adGroupStatus = AdGroupStatus::name($adGroup->getStatus());
 
