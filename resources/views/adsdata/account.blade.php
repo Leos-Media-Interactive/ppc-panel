@@ -156,7 +156,7 @@
                                     data-id="{{ $_row['campaign']['id'] }}"
                                     class="{{ $_row['el-class'] }} cmp-nav btn btn-outline btn-info border-b flex justify-between @if ($loop->first) btn-active @endif">
                                 <span class="text-right text-black block w-max">{{ $_row['campaign']['name'] }}</span>
-                                {{ svg($_row['device'], 'w-4 w-4') }}
+{{--                                {{ svg($_row['device'], 'w-4 w-4') }}--}}
                             </button>
                         @endforeach
                     @endif

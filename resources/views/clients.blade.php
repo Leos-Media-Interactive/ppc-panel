@@ -3,18 +3,22 @@
         <h2 class="font-semibold text-xl text-right text-gray-800 leading-tight">
             לקוחות
         </h2>
-
-        <a href="{{ route('page.clients.add') }}" class="border border-indigo-500 bg-indigo-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline">
-            לקוח חדש
-        </a>
     </x-slot>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/jstable.css') }}" >
     <script type="text/javascript" src="{{ asset('js/jstable.js') }}"></script>
 
     <div class="py-12">
+        <div>
+        </div>
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="container p-2 mx-auto sm:p-4 text-gray-800">
+                    <div class="flex justify-end">
+                        <a href="{{ route('page.clients.add') }}" class="border border-indigo-500 bg-indigo-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline">
+                            לקוח חדש
+                        </a>
+                    </div>
+
                     <div class="overflow-x-auto">
                         <table class="min-w-full text-xs text-right w:100" id="clients" style="direction: rtl">
                             <colgroup>

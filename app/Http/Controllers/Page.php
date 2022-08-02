@@ -46,7 +46,7 @@ class Page extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'adwords_id' => 'required|numeric'
+            //'adwords_id' => 'required|numeric'
         ]);
 
 
@@ -54,6 +54,7 @@ class Page extends Controller
         $password = $user_data['password'];
         $user_data['password'] = Hash::make($password);
         $user_data['role'] = 'client';
+        $user_data['adwords_id'] = str_replace('-', '', $user_data['adwords_id']);
         $user_data['client_services'] = json_encode([
             'credit' => 0,
             'mobile' => 0,

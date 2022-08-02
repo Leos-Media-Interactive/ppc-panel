@@ -12,6 +12,7 @@ class AdsData extends Controller
     public function account(Request $request, $range = 'TODAY')
     {
 
+
         $userAdwordsId = auth()->user()->adwords_id;
 
         if(auth()->user()->role === 'super_admin' || auth()->user()->role === 'manager'){
@@ -19,6 +20,7 @@ class AdsData extends Controller
                 $userAdwordsId = session('client_adwords_id');
             }
         }
+
 
         $ads = new GoogleAdsApi();
         $data = $ads->ACCOUNT_PERFORMANCE_REPORT($userAdwordsId, $range);

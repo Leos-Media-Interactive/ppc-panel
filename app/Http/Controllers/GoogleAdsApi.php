@@ -26,7 +26,7 @@ class GoogleAdsApi extends Controller
 {
 
     private static array $_REPORT_TYPE = [
-        'ACCOUNT_PERFORMANCE_REPORT' => ['campaign.id', 'campaign.name', 'customer.descriptive_name', 'metrics.impressions', 'metrics.clicks', 'metrics.ctr', 'metrics.average_cpc', 'metrics.conversions', 'metrics.conversions_from_interactions_rate', 'metrics.cost_per_conversion', 'metrics.cost_micros', 'customer.currency_code', 'metrics.conversions_value', 'segments.device'],
+        'ACCOUNT_PERFORMANCE_REPORT' => ['campaign.id', 'campaign.name', 'customer.descriptive_name', 'metrics.impressions', 'metrics.clicks', 'metrics.ctr', 'metrics.average_cpc', 'metrics.conversions', 'metrics.conversions_from_interactions_rate', 'metrics.cost_per_conversion', 'metrics.cost_micros', 'customer.currency_code', 'metrics.conversions_value'], // 'segments.device'
         'KEYWORDS_PERFORMANCE_REPORT' => ['campaign.id', 'campaign.name', 'ad_group.id', 'ad_group.name', 'ad_group.status',  'metrics.impressions', 'metrics.clicks', 'metrics.ctr', 'metrics.average_cpc', 'metrics.conversions', 'metrics.conversions_from_interactions_rate', 'metrics.cost_per_conversion', 'metrics.cost_micros', 'metrics.conversions_value'],
         'CALL_METRICS_CALL_DETAILS_REPORT' => ['campaign.id', 'campaign.name', 'ad_group.id', 'ad_group.name', 'customer.currency_code', 'call_view.call_duration_seconds', 'call_view.caller_country_code', 'call_view.call_status', 'call_view.call_tracking_display_location', 'call_view.type', 'campaign.name', 'call_view.start_call_date_time'],
     ];
@@ -44,8 +44,10 @@ class GoogleAdsApi extends Controller
     }
 
     private function tryQuery($client, $adwords_id, $query){
+
+
         try{
-            $response['response'] = $client->search($adwords_id, $query, ['pageSize' => 1000]);
+            $response['response'] = $client->search($adwords_id, $query);
             $response['status'] = 'success';
         }catch (GoogleAdsException $googleAdsException){
 
@@ -97,6 +99,7 @@ class GoogleAdsApi extends Controller
             $range = " AND segments.date DURING " . $range;
         }
 
+
         return "SELECT "
             . implode(', ', self::$_REPORT_TYPE[$reportType])
             . " FROM " . $from
@@ -135,15 +138,16 @@ class GoogleAdsApi extends Controller
 
         foreach ($response['response']->iterateAllElements() as $googleAdsRow) {
 
+
             $metrics = $googleAdsRow->getMetrics();
             $segment = $googleAdsRow->getSegments();
             $device = new \Google\Ads\GoogleAds\V11\Enums\DeviceEnum\Device();
 
-            if($device->name($segment->getDevice()) !== 'DESKTOP') continue;
+            //if($device->name($segment->getDevice()) !== 'DESKTOP') continue;
 
             $data['response']['ad_rows'][] = [
-                'el-class' => $device->name($segment->getDevice()),
-                'device' => $device_icon[$device->name($segment->getDevice())],
+                'el-class' => $segment ? $device->name($segment->getDevice()) : null,
+                'device' => $segment ? $device_icon[$device->name($segment->getDevice())] : null,
                 'campaign' => [
                     'id' => $googleAdsRow->getCampaign()->getId(),
                     'name' => $googleAdsRow->getCampaign()->getName()
@@ -163,6 +167,7 @@ class GoogleAdsApi extends Controller
 
         }
 
+
         return $data;
 
     }
@@ -174,7 +179,7 @@ class GoogleAdsApi extends Controller
         $q = $this->buildQuery('KEYWORDS_PERFORMANCE_REPORT', 'ad_group', $range);
 
 
-        $response = $client->search($adwords_id, $q, ['pageSize' => 1000]);
+        $response = $client->search($adwords_id, $q, ['pageSize' => 9999]);
         $data = [
             'status' => 'success',
             'response' => []
