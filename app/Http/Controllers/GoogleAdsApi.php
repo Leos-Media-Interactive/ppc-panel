@@ -26,7 +26,7 @@ class GoogleAdsApi extends Controller
 {
 
     private static array $_REPORT_TYPE = [
-        'ACCOUNT_PERFORMANCE_REPORT' => ['campaign.id', 'campaign.name', 'customer.descriptive_name', 'metrics.impressions', 'metrics.clicks', 'metrics.ctr', 'metrics.average_cpc', 'metrics.conversions', 'metrics.conversions_from_interactions_rate', 'metrics.cost_per_conversion', 'metrics.cost_micros', 'customer.currency_code', 'metrics.conversions_value'], // 'segments.device'
+        'ACCOUNT_PERFORMANCE_REPORT' => ['campaign.id', 'campaign.name', 'customer.descriptive_name', 'metrics.impressions', 'metrics.clicks', 'metrics.ctr', 'metrics.average_cpc', 'metrics.conversions', 'metrics.conversions_from_interactions_rate', 'metrics.cost_per_conversion', 'metrics.cost_micros', 'customer.currency_code', 'metrics.conversions_value', 'metrics.phone_calls'], // 'segments.device'
         'KEYWORDS_PERFORMANCE_REPORT' => ['campaign.id', 'campaign.name', 'ad_group.id', 'ad_group.name', 'ad_group.status',  'metrics.impressions', 'metrics.clicks', 'metrics.ctr', 'metrics.average_cpc', 'metrics.conversions', 'metrics.conversions_from_interactions_rate', 'metrics.cost_per_conversion', 'metrics.cost_micros', 'metrics.conversions_value'],
         'CALL_METRICS_CALL_DETAILS_REPORT' => ['campaign.id', 'campaign.name', 'ad_group.id', 'ad_group.name', 'customer.currency_code', 'call_view.call_duration_seconds', 'call_view.caller_country_code', 'call_view.call_status', 'call_view.call_tracking_display_location', 'call_view.type', 'campaign.name', 'call_view.start_call_date_time'],
     ];
@@ -161,7 +161,8 @@ class GoogleAdsApi extends Controller
                     'cost_micros' => $metrics->getCostMicros(),
                     'conversions_from_interactions_rate' => $metrics->getConversionsFromInteractionsRate(),
                     'conversions_value' => $metrics->getConversionsValue(),
-                    'cost_per_conversion' => $metrics->getCostPerConversion()
+                    'cost_per_conversion' => $metrics->getCostPerConversion(),
+                    'phone_calls' => $metrics->getPhoneCalls()
                 ]
             ];
 

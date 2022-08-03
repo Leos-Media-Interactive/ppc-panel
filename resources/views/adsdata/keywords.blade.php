@@ -138,7 +138,7 @@
         <div class="bg-white md:w-80  w-full shadow-xl mx-2 sm:rounded-lg">
             <div class="container p-2 mx-auto sm:p-4 text-gray-800">
                 <x-jet-range-controller content="{{ route('stats.keywords') }}" range="{{ $selected_range }}" />
-                <h3 class="text-center mb-2">מילות מפתח</h3>
+                <h3 class="text-center mb-2">מילות מפתח מובילות</h3>
                 <div class="divider"></div>
                 <div class="btn-group btn-group-vertical">
                     @foreach($account_performance['ad_rows'] as $_row)
